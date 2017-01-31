@@ -2,6 +2,7 @@ import pygame
 import os.path
 import random
 import time
+import vlc
 
 clock = pygame.time.Clock()
 

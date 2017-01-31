@@ -5,6 +5,8 @@ import os.path
 import pandas as pd
 from displayElements import *
 from pygame import movie
+from Tkinter import *
+import vlc
 
 #### Participant Name
 participant = 'max'
@@ -50,25 +52,18 @@ be selected
 def start_brief():
 
     FPS = 60
-    movie = pygame.movie.Movie("Tutorial_1.mpg")
-    screen = pygame.display.set_mode(movie.get_size())
-    movie_screen = pygame.Surface(movie.get_size()).convert()
 
-    movie.set_display(movie_screen)
-    movie.play()
 
-    playing = True
-    while playing:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                movie.stop()
-                playing = False
+    pygame.display.get_wm_info()
+    movie = os.path.expanduser('Tutorial_1.mpg')
+    vlcInstance = vlc.Instance()
+    media = vlcInstance.media_new(movie)
+    player = vlcInstance.media_player_new()
+    player.set_media(media)
+    pygame.mixer.quit()
 
-        screen.blit(movie_screen,(0,0))
-        pygame.display.update()
-        clock.tick(FPS)
+    player.play()
 
-    experiment_Title()
 
 
 
